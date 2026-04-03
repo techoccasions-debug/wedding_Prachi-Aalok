@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aalok & Prachi — A Royal Wedding</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
@@ -1369,6 +1369,129 @@
     .modal-box { padding: 40px 28px; }
     section { padding: 70px 20px; }
   }
+
+  #emotionalIntro {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: black;
+}
+
+.emotional-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: zoomBg 10s ease-in-out infinite alternate;
+}
+
+@keyframes zoomBg {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+.emotional-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+
+.emotional-content {
+  position: relative;
+  text-align: center;
+  max-width: 700px;
+  padding: 20px;
+}
+
+.emotional-line {
+  opacity: 0;
+  transform: translateY(20px);
+  color: #fdf6e3;
+  font-size: 20px;
+  margin: 10px 0;
+  font-family: 'Cormorant Garamond', serif;
+  animation: fadeLine 1s forwards;
+}
+
+.emotional-big {
+  opacity: 0;
+  font-size: 40px;
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+  animation: fadeLine 1s forwards;
+}
+
+/* delays */
+.delay1 { animation-delay: 1s; }
+.delay2 { animation-delay: 2s; }
+.delay3 { animation-delay: 3s; }
+.delay4 { animation-delay: 4s; }
+.delay5 { animation-delay: 5s; }
+.delay6 { animation-delay: 6s; }
+
+@keyframes fadeLine {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#enterBtn {
+  margin-top: 40px;
+  padding: 12px 28px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+#enterBtn.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#enterBtn:hover {
+  background: var(--gold);
+  color: #000;
+}
+#emotionalBg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;      /* KEY */
+  background-position: center; /* KEY */
+  background-repeat: no-repeat;
+  z-index: -1;
+
+  transition: background-image 1s ease-in-out;
+}
+#emotionalIntro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5); /* dark cinematic overlay */
+  z-index: 0;
+}
+.emotional-content {
+  position: relative;
+  z-index: 2;
+}
+#emotionalBg {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out, background-image 1s ease-in-out;
+}
 </style>
 </head>
 <body>
@@ -1494,6 +1617,29 @@
 <!-- ═══════════════════════════════════════ -->
 <!--  MAIN CONTENT (revealed after envelope) -->
 <!-- ═══════════════════════════════════════ -->
+
+<!-- ═══════════════════════════════════════ -->
+<!--  EMOTIONAL INTRO (LADLI MOMENT)        -->
+<!-- ═══════════════════════════════════════ -->
+<section id="emotionalIntro">
+<div id="emotionalBg"></div>
+  <div class="emotional-bg" id="emotionalBg"></div>
+
+  <div class="emotional-overlay"></div>
+
+  <div class="emotional-content">
+    <p class="emotional-line">A daughter… a little princess…</p>
+    <p class="emotional-line delay1">Once held her father’s finger,</p>
+    <p class="emotional-line delay2">and learned to walk in this world…</p>
+    <p class="emotional-line delay3">Filled her mother’s life with love, laughter, and dreams…</p>
+    <p class="emotional-line delay4">And today…</p>
+    <h2 class="emotional-big delay5">She begins a new journey</h2>
+    <p class="emotional-line delay6">From being their little girl… to someone’s forever.</p>
+    <div><button id="enterBtn">Continue to Invitation ✨</button></div>
+  </div>
+
+</section>
+
 <div id="mainContent">
 
   <!-- ─── HERO ─── -->
@@ -1629,37 +1775,42 @@
       </p>
     </div>
 
-    <div class="family-cards">
-      <!-- Bride's Family -->
-      <div class="family-card reveal-left">
-        <div style="position:relative;">
-          <!-- FAMILY IMAGE: Replace with actual bride's parents photo -->
-          <div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto 20px;border:3px solid var(--gold);" data-label="{{FAMILY_IMAGE}}">
-            <span style="font-size:30px;opacity:0.3;">👨‍👩‍👧</span>
-          </div>
-        </div>
-        <p class="family-role">Bride's Family</p>
-        <h3 class="family-name">Mr. & Mrs. Ramesh Gupta</h3>
-        <p class="family-message">
-          "Our daughter has always been our greatest joy. Today, we don't lose a daughter — we gain a son and a new chapter filled with love."
-        </p>
-        <span class="heart-deco">♥</span>
-      </div>
+    
+  <div class="family-cards">
 
-      <!-- Groom's Family -->
-      <div class="family-card reveal-right">
-        <div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto 20px;border:3px solid var(--gold);" data-label="{{FAMILY_IMAGE}}">
-          <span style="font-size:30px;opacity:0.3;">👨‍👩‍👦</span>
-        </div>
-        <p class="family-role">Groom's Family</p>
-        <h3 class="family-name">Mr. & Mrs. Vikram Sharma</h3>
-        <p class="family-message">
-          "We welcome Prachi into our home with open hearts. She is not just our son's choice — she is our family's blessing."
-        </p>
-        <span class="heart-deco">♥</span>
+  <!-- Bride's Father -->
+  <div class="family-card reveal-left">
+    <div style="position:relative;">
+      <div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto 20px;border:3px solid var(--gold);">
+        <span style="font-size:30px;opacity:0.3;">👨</span>
       </div>
     </div>
-  </section>
+    <p class="family-role">Bride's Father</p>
+    <h3 class="family-name">Mr. Ramesh Gupta</h3>
+    <p class="family-message">
+      "With pride and love, I give my daughter into a new journey, knowing she carries our values and blessings with her."
+    </p>
+    <span class="heart-deco">♥</span>
+  </div>
+
+  <!-- Bride's Mother -->
+  <div class="family-card reveal-bottom">
+    <div style="position:relative;">
+      <div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto 20px;border:3px solid var(--gold);">
+        <span style="font-size:30px;opacity:0.3;">👩</span>
+      </div>
+    </div>
+    <p class="family-role">Bride's Mother</p>
+    <h3 class="family-name">Mrs. Suman Gupta</h3>
+    <p class="family-message">
+      "From holding her little hands to watching her step into a new life, my heart is full of love, blessings, and joy."
+    </p>
+    <span class="heart-deco">♥</span>
+  </div>
+
+  
+
+</div>
 
   <!-- ─── COUNTDOWN ─── -->
   <section id="countdown">
@@ -2211,6 +2362,59 @@
     document.getElementById('invitationText').style.opacity = '1';
     document.getElementById('invitationText').style.animation = 'fadeInUp 1.5s ease 2s both';
   }, 3100);
+
+window.addEventListener("load", function () {
+
+  const emotionalImages = [
+    "childhood1.jpeg",
+    "childhood2.jpeg",
+    "family1.jpeg",
+    "father.jpeg",
+    "mother.jpeg"
+  ];
+
+  let emoIndex = 0;
+  const bg = document.getElementById("emotionalBg");
+  const enterBtn = document.getElementById("enterBtn");
+
+  // BACKGROUND SLIDESHOW WITH FADE
+  function changeEmoBg() {
+    bg.style.opacity = 0;
+
+    setTimeout(() => {
+      bg.style.backgroundImage = `url(${emotionalImages[emoIndex]})`;
+      bg.style.opacity = 1;
+      emoIndex = (emoIndex + 1) % emotionalImages.length;
+    }, 700);
+  }
+
+  changeEmoBg();
+  setInterval(changeEmoBg, 3000);
+
+  // SHOW BUTTON AFTER TEXT FINISHES
+  setTimeout(() => {
+    enterBtn.classList.add("show");
+  }, 7000);
+
+  // ENTER BUTTON CLICK
+  enterBtn.addEventListener("click", function () {
+    const intro = document.getElementById("emotionalIntro");
+    const main = document.getElementById("mainContent");
+
+    intro.style.opacity = "0";
+
+    setTimeout(() => {
+      intro.style.display = "none";
+      main.style.display = "block";
+
+      setTimeout(() => {
+        main.style.opacity = "1";
+      }, 100);
+
+    }, 1000);
+  });
+
+});
 </script>
 
 </body>
