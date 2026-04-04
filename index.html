@@ -411,9 +411,9 @@
   object-position: center 40%;
 
   /* Soft cinematic look */
-  filter: brightness(0.9) contrast(1.1) saturate(1.05);
+  filter: brightness(1) contrast(1) saturate(0.8);
 
-  transition: transform 12s ease-out;
+  transition: transform 6s ease-out;
    background: #000;
 }
 
@@ -1768,6 +1768,28 @@ isolation: isolate;
     order: -1;
   }
 }
+
+.family-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: block;
+  object-fit: cover;
+
+  border: 3px solid var(--gold);
+
+  /* Premium touch */
+  box-shadow: 
+    0 10px 25px rgba(0,0,0,0.25),
+    0 0 0 4px rgba(201,168,76,0.15);
+
+  transition: transform 0.4s ease;
+}
+
+.family-card:hover .family-img {
+  transform: scale(1.08);
+}
 </style>
 </head>
 <body>
@@ -2082,33 +2104,36 @@ isolation: isolate;
 
   <!-- Bride's Father -->
   <div class="family-card reveal-left">
-    <div style="position:relative;">
-      <div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto 20px;border:3px solid var(--gold);">
-        <span style="font-size:30px;opacity:0.3;">👨</span>
-      </div>
-    </div>
-    <p class="family-role">Bride's Father</p>
-    <h3 class="family-name">Mr. Ramesh Gupta</h3>
-    <p class="family-message">
-      "With pride and love, I give my daughter into a new journey, knowing she carries our values and blessings with her."
-    </p>
-    <span class="heart-deco">♥</span>
+  <div style="position:relative;">
+    <img 
+      src="father.jpg" 
+      alt="Bride's Father"
+      class="family-img"
+    />
   </div>
-
+  <p class="family-role">Bride's Father</p>
+  <h3 class="family-name">Mr. Ramesh Gupta</h3>
+  <p class="family-message">
+    "With pride and love, I give my daughter into a new journey, knowing she carries our values and blessings with her."
+  </p>
+  <span class="heart-deco">♥</span>
+</div>
   <!-- Bride's Mother -->
-  <div class="family-card reveal-bottom">
-    <div style="position:relative;">
-      <div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto 20px;border:3px solid var(--gold);">
-        <span style="font-size:30px;opacity:0.3;">👩</span>
-      </div>
-    </div>
-    <p class="family-role">Bride's Mother</p>
-    <h3 class="family-name">Mrs. Suman Gupta</h3>
-    <p class="family-message">
-      "From holding her little hands to watching her step into a new life, my heart is full of love, blessings, and joy."
-    </p>
-    <span class="heart-deco">♥</span>
+ <div class="family-card reveal-bottom">
+  <div style="position:relative;">
+    <img 
+      src="mother.jpg" 
+      alt="Bride's Mother"
+      class="family-img"
+    />
   </div>
+  <p class="family-role">Bride's Mother</p>
+  <h3 class="family-name">Mrs. Suman Gupta</h3>
+  <p class="family-message">
+    "From holding her little hands to watching her step into a new life, my heart is full of love, blessings, and joy."
+  </p>
+  <span class="heart-deco">♥</span>
+</div>
 
   
 
@@ -2509,50 +2534,57 @@ isolation: isolate;
   }
 
   // ─── MUSIC ─────────────────────────────────────
-  let musicPlaying = false;
-  const audio = document.getElementById('bgMusic');
+  
+  
 
- function tryPlayMusic() {
+function tryPlayMusic() {
+  const audio = document.getElementById('bgMusic');
+  const label = document.getElementById('musicLabel');
+  const icon  = document.getElementById('musicIcon');
+
   if (!audio) return;
 
   audio.volume = 0.3;
 
-  audio.muted = true;
-
-  const playPromise = audio.play();
-
-  if (playPromise !== undefined) {
-    playPromise.then(() => {
-      audio.muted = false; // 🔥 unmute after play starts
-      musicPlaying = true;
-      document.getElementById('musicLabel').textContent = 'PAUSE';
-    }).catch(() => {
-      console.log("Blocked");
-    });
-  }
+  audio.play().then(() => {
+    label.textContent = 'PAUSE';
+    icon.classList.remove('paused');
+  }).catch(() => {
+    console.log("Autoplay blocked");
+  });
 }
 
   function toggleMusic() {
-    if (!audio.src || audio.src === window.location.href) {
-      // No music file loaded — show placeholder feedback
-      const btn = document.getElementById('musicToggle');
-      btn.style.borderColor = 'rgba(201,168,76,0.8)';
-      setTimeout(() => btn.style.borderColor = 'rgba(201,168,76,0.4)', 1000);
-      return;
-    }
-    if (musicPlaying) {
-      audio.pause();
-      musicPlaying = false;
-      document.getElementById('musicIcon').classList.add('paused');
-      document.getElementById('musicLabel').textContent = 'MUSIC';
-    } else {
-      audio.play();
-      musicPlaying = true;
-      document.getElementById('musicIcon').classList.remove('paused');
-      document.getElementById('musicLabel').textContent = 'PAUSE';
-    }
-  }
+  const audio = document.getElementById('bgMusic');
+  const icon  = document.getElementById('musicIcon');
+  const label = document.getElementById('musicLabel');
 
+  if (!audio) return;
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      label.textContent = 'PAUSE';
+      icon.classList.remove('paused');
+    }).catch(() => {
+      console.log("Play blocked");
+    });
+  } else {
+    audio.pause();
+    label.textContent = 'MUSIC';
+    icon.classList.add('paused');
+  }
+}
+const audio = document.getElementById('bgMusic');
+
+audio.addEventListener('play', () => {
+  document.getElementById('musicLabel').textContent = 'PAUSE';
+  document.getElementById('musicIcon').classList.remove('paused');
+});
+
+audio.addEventListener('pause', () => {
+  document.getElementById('musicLabel').textContent = 'MUSIC';
+  document.getElementById('musicIcon').classList.add('paused');
+});
   // ─── SCROLL REVEAL ─────────────────────────────
   function initScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
