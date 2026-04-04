@@ -76,6 +76,7 @@
   #musicToggle {
     position: fixed;
     top: 24px; right: 24px;
+    left: auto;
     z-index: 10000;
     background: rgba(201,168,76,0.15);
     backdrop-filter: blur(12px);
@@ -90,6 +91,7 @@
     display: flex; align-items: center; gap: 8px;
     transition: all 0.3s;
     letter-spacing: 1px;
+    margin-left: 30px;
   }
   #musicToggle:hover { background: rgba(201,168,76,0.3); transform: scale(1.05); }
   .music-icon { font-size: 16px; animation: musicPulse 1s ease-in-out infinite; }
@@ -448,7 +450,7 @@
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   margin-bottom: 16px;
-
+margin-top: 40px;
   opacity: 0;
   animation: fadeInUp 0.8s ease 0.4s both;
 }
@@ -1790,6 +1792,114 @@ isolation: isolate;
 .family-card:hover .family-img {
   transform: scale(1.08);
 }
+
+.petal {
+  position: fixed;
+  top: -20px;
+  pointer-events: none;
+
+  /* Softer & elegant */
+  opacity: 0.7;
+  filter: blur(0.3px);
+
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(110vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+.petal {
+  position: fixed;
+  top: -20px;
+  pointer-events: none;
+
+  opacity: 0.8;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+
+  animation: fall linear forwards;
+}
+.footer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold-light);
+  margin-bottom: 30px;
+}
+
+.contact-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contact-item {
+  text-align: center;
+  max-width: 180px;
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 50%;
+
+  transition: all 0.3s ease;
+}
+
+.contact-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+}
+
+.contact-item:hover .contact-icon {
+  transform: scale(1.1);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(201,168,76,0.3);
+}
+
+.contact-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-tagline {
+  margin-top: 40px;
+  color: rgba(201,168,76,0.8);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+#musicToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  left: auto !important;   /* 🔥 prevents shifting */
+}
+#musicIcon.paused {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
 </style>
 </head>
 <body>
@@ -1813,7 +1923,7 @@ isolation: isolate;
 <!-- ═══════════════════════════════════════ -->
 <button id="musicToggle" onclick="toggleMusic()">
   <span class="music-icon" id="musicIcon">♪</span>
-  <span id="musicLabel">MUSIC</span>
+  <span id="musicLabel">PLAY MUSIC</span>
 </button>
 
 <!-- ═══════════════════════════════════════ -->
@@ -2352,30 +2462,55 @@ isolation: isolate;
 
 </section>
   <!-- ─── FOOTER ─── -->
-  <footer>
-    <div class="footer-content">
-    <h3>📞 Royal Contact Details</h3>
+ <footer>
+  <div class="footer-content">
+    <h3 class="footer-title">Contact & Venue</h3>
+
     <div class="contact-grid">
+
       <div class="contact-item">
-        <div class="contact-icon">📱</div>
-        <div class="contact-text">Family Helpline<br>+91 98765 43210</div>
+        <div class="contact-icon">
+          <!-- Phone Icon -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M6 2h4l2 5-3 2a14 14 0 006 6l2-3 5 2v4a2 2 0 01-2 2A18 18 0 014 4a2 2 0 012-2z"/>
+          </svg>
+        </div>
+        <div class="contact-text">
+          Family Contact<br>+91 98765 43210
+        </div>
       </div>
+
       <div class="contact-item">
-        <div class="contact-icon">📱</div>
-        <div class="contact-text">Family Helpline<br>+91 98765 43211</div>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M6 2h4l2 5-3 2a14 14 0 006 6l2-3 5 2v4a2 2 0 01-2 2A18 18 0 014 4a2 2 0 012-2z"/>
+          </svg>
+        </div>
+        <div class="contact-text">
+          Brother Contact<br>+91 98765 43211
+        </div>
       </div>
+
       <div class="contact-item">
-        <div class="contact-icon">✉️</div>
-        <div class="contact-text">Email<br>royalwedding@example.com</div>
+        <div class="contact-icon">
+          <!-- Location Icon -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 21s-6-5.5-6-10a6 6 0 1112 0c0 4.5-6 10-6 10z"/>
+            <circle cx="12" cy="11" r="2"/>
+          </svg>
+        </div>
+        <div class="contact-text">
+          Venue<br>Paradise Hotel<br>Mumbai
+        </div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon">📍</div>
-        <div class="contact-text">Venue<br>Paradise Hotel<br>Mumbai</div>
-      </div>
+
     </div>
-    <p style="margin-top: 2rem; color: rgba(212,175,55,0.8);">With Love & Blessings 💍👑</p>
+
+    <p class="footer-tagline">
+      With Love & Blessings
+    </p>
   </div>
-  </footer>
+</footer>
 
 </div> <!-- end #mainContent -->
 
@@ -2402,7 +2537,7 @@ isolation: isolate;
   window.addEventListener('load', () => {
     setTimeout(() => {
       document.getElementById('pageLoader').classList.add('hidden');
-    }, 3000);
+    }, 2000);
   });
 
   // ─── CUSTOM CURSOR ─────────────────────────────
@@ -2496,24 +2631,24 @@ isolation: isolate;
 }
 
   // ─── FLOATING PETALS ───────────────────────────
-  const petalEmojis = ['🌸', '🌺', '🌹', '💮', '✿', '❀', '🌷'];
+  
 
-  function createPetal() {
-    const petal = document.createElement('div');
-    petal.className = 'petal';
-    petal.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
-    petal.style.left = Math.random() * 100 + 'vw';
-    petal.style.animationDuration = (4 + Math.random() * 8) + 's';
-    petal.style.animationDelay = (Math.random() * 4) + 's';
-    petal.style.fontSize = (14 + Math.random() * 14) + 'px';
-    document.getElementById('petalsContainer').appendChild(petal);
-    setTimeout(() => petal.remove(), 14000);
-  }
+function createPetal() {
+  const petal = document.createElement('img');
+  petal.src = 'petal.png'; // 🔥 use real image
+  petal.className = 'petal';
 
-  function startPetals() {
-    for (let i = 0; i < 6; i++) setTimeout(() => createPetal(), i * 300);
-    setInterval(createPetal, 800);
-  }
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.animationDuration = (6 + Math.random() * 6) + 's';
+  petal.style.width = (30 + Math.random() * 30) + 'px';
+
+  document.getElementById('petalsContainer').appendChild(petal);
+
+  setTimeout(() => petal.remove(), 12000);
+}
+
+  for (let i = 0; i < 6; i++) setTimeout(() => createPetal(), i * 400);
+setInterval(createPetal, 1000);
 
   // ─── GOLD PARTICLES ────────────────────────────
   function createGoldParticle() {
@@ -2563,7 +2698,7 @@ function tryPlayMusic() {
 
   if (audio.paused) {
     audio.play().then(() => {
-      label.textContent = 'PAUSE';
+      label.textContent = 'PAUSE MUSIC';
       icon.classList.remove('paused');
     }).catch(() => {
       console.log("Play blocked");
