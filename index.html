@@ -2365,7 +2365,7 @@ isolation: isolate;
   Replace the src with an actual audio file URL
   Example: <source src="your-wedding-music.mp3" type="audio/mpeg">
 -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop playsinline preload="auto">
   <source src="wedding.mp3" type="audio/mpeg">
 </audio>
 
@@ -2421,11 +2421,12 @@ isolation: isolate;
 
   
   function openEnvelope() {
+    tryPlayMusic();
   if (envelopeOpened) return;
   envelopeOpened = true;
 
   // ✅ START MUSIC IMMEDIATELY (user interaction safe)
-  tryPlayMusic();
+  
 
   const wrapper   = document.getElementById('envelopeWrapper');
   const flap      = document.getElementById('envelopeFlap');
@@ -2516,14 +2517,19 @@ isolation: isolate;
 
   audio.volume = 0.3;
 
-  audio.play()
-    .then(() => {
+  audio.muted = true;
+
+  const playPromise = audio.play();
+
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      audio.muted = false; // 🔥 unmute after play starts
       musicPlaying = true;
       document.getElementById('musicLabel').textContent = 'PAUSE';
-    })
-    .catch(err => {
-      console.log("Play blocked:", err);
+    }).catch(() => {
+      console.log("Blocked");
     });
+  }
 }
 
   function toggleMusic() {
