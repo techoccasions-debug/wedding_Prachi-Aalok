@@ -716,6 +716,14 @@
     margin-top: 16px;
     display: block;
   }
+  #family {
+  padding: 80px 20px 100px;
+}
+
+.family-cards {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
 
   /* ─── COUPLE PORTRAITS ─── */
   #portraits {
@@ -1225,38 +1233,53 @@
   }
 
   /* ─── FOOTER ─── */
-  footer {
-    background: var(--red-deep);
-    padding: 60px 24px 40px;
-    text-align: center;
-    border-top: 1px solid rgba(201,168,76,0.2);
-  }
-  footer .footer-names {
-    font-family: 'Great Vibes', cursive;
-    font-size: 48px;
-    color: var(--gold-light);
-    text-shadow: 0 0 30px rgba(201,168,76,0.3);
-  }
-  footer .footer-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    color: rgba(253,246,227,0.5);
-    font-style: italic;
-    margin-top: 8px;
-  }
-  footer .footer-divider {
-    width: 80px; height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    margin: 24px auto;
-  }
-  footer .footer-copy {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: rgba(253,246,227,0.3);
-    text-transform: uppercase;
-    font-family: 'Poppins', sans-serif;
-  }
+  
+ 
+footer {
+  background: linear-gradient(135deg, var(--maroon), var(--deep-maroon));
+  color: var(--gold);
+  padding: 3rem 1rem 2rem 1rem;
+  text-align: center;
+}
+.footer-content h3 {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.contact-item {
+  background: rgba(245,245,220,0.12);
+  padding: 1.2rem;
+  border-radius: 15px;
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(212,175,55,0.4);
+}
+.contact-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+.contact-text { font-size: 0.95rem; font-weight: 600; }
 
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .name { font-size: 2.8rem !important; }
+  h2 { font-size: 2rem; }
+  .about-grid { grid-template-columns: 1fr; }
+  .events-timeline {
+    padding: 2.5rem 1rem;
+  }
+  .timeline-line {
+    left: 20px !important;
+    width: 4px;
+  }
+  .event-dot {
+    left: 0 !important;
+    right: auto !important;
+    top: 15px;
+  }
+}
   /* ─── SCROLL REVEAL ─── */
   .reveal {
     opacity: 0;
@@ -1720,50 +1743,71 @@
   </section>
 
   <!-- ─── COUPLE PORTRAITS ─── -->
-  <section id="portraits">
-    <div style="text-align:center;margin-bottom:60px;">
-      <span class="section-label" style="color:rgba(201,168,76,0.7);">✦ The Couple ✦</span>
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,52px);color:var(--cream);">Two souls, <em style="color:var(--gold-light);">one destiny</em></h2>
+  <!-- ─── COUPLE PORTRAITS ─── -->
+<section id="portraits">
+
+  <div style="text-align:center;margin-bottom:60px;">
+    <span class="section-label" style="color:rgba(201,168,76,0.7);">✦ The Couple ✦</span>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,52px);color:var(--cream);">
+      Two souls, <em style="color:var(--gold-light);">one destiny</em>
+    </h2>
+  </div>
+
+  <div class="portraits-grid">
+
+    <!-- Groom -->
+    <div class="portrait-card reveal-left" style="text-align:right;">
+      <div style="display:inline-block;">
+
+        <div class="portrait-img-wrap">
+          <div style="width:240px;height:300px;overflow:hidden;border-radius:16px;">
+            <img src="groom.jpeg" alt="Aalok"
+                 style="width:100%;height:100%;object-fit:cover;">
+          </div>
+        </div>
+
+        <p class="portrait-name">Aalok</p>
+        <p class="portrait-sub">The Groom</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(253,246,227,0.6);margin-top:8px;font-style:italic;">
+          Son of Mr. & Mrs. Sharma
+        </p>
+
+      </div>
     </div>
 
-    <div class="portraits-grid">
-      <!-- Groom -->
-      <div class="portrait-card reveal-left" style="text-align:right;">
-        <div style="display:inline-block;">
-          <div class="portrait-img-wrap">
-            <!-- GROOM IMAGE: Replace with actual groom photo -->
-            <div class="img-placeholder" style="width:240px;height:300px;" data-label="{{GROOM_IMAGE}}">
-              <span class="placeholder-icon">🤵</span>
-            </div>
-          </div>
-          <p class="portrait-name">Aalok</p>
-          <p class="portrait-sub">The Groom</p>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(253,246,227,0.6);margin-top:8px;font-style:italic;">Son of Mr. & Mrs. Sharma</p>
-        </div>
+    <!-- Center Ampersand -->
+    <div class="portraits-center reveal">
+      <div class="big-ampersand">&</div>
+      <div class="divider-dots">
+        <span></span><span></span><span></span><span></span><span></span>
       </div>
+    </div>
 
-      <!-- Ampersand center -->
-      <div class="portraits-center reveal">
-        <div class="big-ampersand">&</div>
-        <div class="divider-dots">
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
-      </div>
+    <!-- Bride -->
+    <div class="portrait-card reveal-right" style="text-align:left;">
+      <div style="display:inline-block;">
 
-      <!-- Bride -->
-      <div class="portrait-card reveal-right" style="text-align:left;">
         <div class="portrait-img-wrap">
-          <!-- BRIDE IMAGE: Replace with actual bride photo -->
-          <div class="img-placeholder" style="width:240px;height:300px;" data-label="{{BRIDE_IMAGE}}">
-            <span class="placeholder-icon">👰</span>
+          <div style="width:240px;height:300px;overflow:hidden;border-radius:16px;">
+            <img src="bride.jpeg" alt="Prachi"
+                 style="width:100%;height:100%;object-fit:cover;">
           </div>
         </div>
+
         <p class="portrait-name">Prachi</p>
         <p class="portrait-sub">The Bride</p>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(253,246,227,0.6);margin-top:8px;font-style:italic;">Daughter of Mr. & Mrs. Gupta</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(253,246,227,0.6);margin-top:8px;font-style:italic;">
+          Daughter of Mr. & Mrs. Gupta
+        </p>
+
       </div>
     </div>
-  </section>
+
+  </div>
+
+</section>
+
+      
 
   <!-- ─── FAMILY ─── -->
   <section id="family">
@@ -1983,15 +2027,28 @@
 
   <!-- ─── FOOTER ─── -->
   <footer>
-    <div class="royal-divider">
-      <div class="line"></div>
-      <span>✦</span>
-      <div class="line"></div>
+    <div class="footer-content">
+    <h3>📞 Royal Contact Details</h3>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div class="contact-text">Family Helpline<br>+91 98765 43210</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div class="contact-text">Family Helpline<br>+91 98765 43211</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-text">Email<br>royalwedding@example.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-text">Venue<br>Paradise Hotel<br>Mumbai</div>
+      </div>
     </div>
-    <p class="footer-names">Aalok & Prachi</p>
-    <p class="footer-tagline">Together forever, beginning 15 April 2026</p>
-    <div class="footer-divider"></div>
-    <p class="footer-copy">Made with ❤ for the most beautiful day of our lives</p>
+    <p style="margin-top: 2rem; color: rgba(212,175,55,0.8);">With Love & Blessings 💍👑</p>
+  </div>
   </footer>
 
 </div> <!-- end #mainContent -->
@@ -2230,7 +2287,8 @@
   // ─── COUNTDOWN ─────────────────────────────────
   function startCountdown() {
     // Set your wedding date here
-    const weddingDate = new Date('2026-02-15T19:00:00');
+   const weddingDate = new Date(2026, 3, 29, 19, 0, 0).getTime();
+
 
     function updateCountdown() {
       const now  = new Date();
@@ -2366,10 +2424,10 @@
 window.addEventListener("load", function () {
 
   const emotionalImages = [
-    "childhood1.jpeg",
-    "childhood2.jpeg",
+    "bride.jpeg",
+    "groom.jpeg",
     "family1.jpeg",
-    "father.jpeg",
+    "father1.jpeg",
     "mother.jpeg"
   ];
 
