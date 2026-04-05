@@ -2010,6 +2010,7 @@ isolation: isolate;
       <!-- Wax Seal -->
       <div class="wax-seal" id="waxSeal">
         <div class="seal-circle" id="sealCircle"></div>
+       
       </div>
     </div>
   </div>
@@ -2719,6 +2720,12 @@ audio.addEventListener('play', () => {
 audio.addEventListener('pause', () => {
   document.getElementById('musicLabel').textContent = 'MUSIC';
   document.getElementById('musicIcon').classList.add('paused');
+});
+const seal = document.getElementById('waxSeal');
+seal.addEventListener('click', function(e) {
+  e.stopPropagation(); // optional: prevents triggering envelopeWrapper click if needed
+  openEnvelope();       // opens the envelope animation
+  tryPlayMusic();       // starts music immediately
 });
   // ─── SCROLL REVEAL ─────────────────────────────
   function initScrollReveal() {
