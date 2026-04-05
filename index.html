@@ -1900,6 +1900,9 @@ isolation: isolate;
   opacity: 0.5;
   transform: scale(0.9);
 }
+#waxSeal .seal-circle {
+    pointer-events: none; /* so taps pass through to the waxSeal container */
+}
 </style>
 </head>
 <body>
@@ -2721,11 +2724,11 @@ audio.addEventListener('pause', () => {
   document.getElementById('musicLabel').textContent = 'MUSIC';
   document.getElementById('musicIcon').classList.add('paused');
 });
-const seal = document.getElementById('waxSeal');
-seal.addEventListener('click', function(e) {
-  e.stopPropagation(); // optional: prevents triggering envelopeWrapper click if needed
-  openEnvelope();       // opens the envelope animation
-  tryPlayMusic();       // starts music immediately
+const waxSeal = document.getElementById('waxSeal');
+waxSeal.addEventListener('click', function(e) {
+    e.stopPropagation(); // prevents envelopeWrapper click conflicts
+    openEnvelope();       // trigger envelope animation
+    tryPlayMusic();       // starts music immediately
 });
   // ─── SCROLL REVEAL ─────────────────────────────
   function initScrollReveal() {
