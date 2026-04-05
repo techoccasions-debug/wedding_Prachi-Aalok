@@ -3000,7 +3000,11 @@ flipbook.addEventListener("touchend", e => {
 
   showPage(currentPage);
 });
-
+const envelope = document.getElementById('envelopeWrapper');
+envelope.addEventListener('click', function(e) {
+    openEnvelope();    // animations
+    tryPlayMusic();    // immediate music start
+});
 // Initialize first page
 showPage(currentPage);
 </script>
